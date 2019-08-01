@@ -228,25 +228,12 @@ if ($arrConfig['ignore_broadcast_ssid'] == 1 || $arrConfig['ignore_broadcast_ssi
                 <div class="row">
                   <div class="form-group col-md-4">
                   <label for="cbxcountries"><?php echo _("Country Code"); ?></label>
-                  <input type="hidden" id="selected_country" value="<?php echo htmlspecialchars($arrConfig['country_code'], ENT_QUOTES); ?>">
                   <select  class="form-control" id="cbxcountries" name="country_code">
                     <?php foreach (iso31662Countries() as $code => $label): ?>
                       <?php $selected_attrib = $code == $arrConfig['country_code'] ? ' selected="selected"' : "" ?>
                       <option value="<?php echo htmlspecialchars($code, ENT_QUOTES) ?>" <?php echo $selected_attrib ?>><?php echo htmlentities($label) ?></option>
                     <?php endforeach ?>
                   </select>
-<script type="text/javascript">
-var country = document.getElementById("selected_country").value;
-var countries = document.getElementById("cbxcountries");
-var ops = countries.getElementsByTagName("option");
-for (var i = 0; i < ops.length; ++i) {
-    if(ops[i].value == country){
-        ops[i].selected=true;
-        break;
-    }
-}
-
-</script>
                 </div>
               </div><!-- /.panel-body -->
             </div><!-- /.panel-primary -->
