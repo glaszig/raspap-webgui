@@ -516,3 +516,14 @@ function SaveTORAndVPNConfig()
     }
 }
 
+/**
+* Return array of countries from config/countries_iso_3166_2.ini
+*/
+function iso31662Countries()
+{
+    static $data;
+    if (empty($data)) {
+        $data = parse_ini_file("config/countries_iso_3166_2.ini");
+    }
+    return $data;
+}
