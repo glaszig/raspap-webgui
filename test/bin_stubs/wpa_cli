@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+echo "
+bssid / frequency / signal level / flags / ssid
+34:81:c4:b5:ba:b8	2412	-16	[WPA-PSK-TKIP][WPA2-PSK-CCMP][WPS][ESS]	internet!!1!11!
+0a:a6:bc:f9:e9:ab	2412	-54	[WPA2-PSK-CCMP][WPS][ESS][P2P]	\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
+0a:a6:bc:f9:e9:ab	2412	-55	[WPA2-PSK-CCMP][WPS][ESS][P2P]	DIRECT-V5-FireTV_3dbd
+7c:ff:4d:5f:86:74	2412	-67	[WPA2-PSK-CCMP][WPS][ESS]	internet!!1!11!
+54:67:51:08:d1:25	2437	-71	[WPA2-PSK-CCMP][WPS][ESS]	KabelBox-5294
+c8:0e:14:98:c3:01	2462	-76	[WPA2-PSK-CCMP][WPS][ESS]	FRITZ!Box 6490 Cable
+00:1e:58:ba:37:af	2417	-79	[WPA-PSK-TKIP][WPA2-PSK-TKIP][WPS][ESS]	Delink
+58:d7:59:dc:1d:25	2412	-79	[WPA2-PSK-CCMP][WPS][ESS]	WLAN-LPLX98
+c4:65:16:66:30:3a	2412	-87	[WPA2-PSK-CCMP][WPS][ESS][P2P]	DIRECT-39-HP DeskJet 2600 series
+b0:98:2b:78:14:f5	2412	-94	[WPA2-PSK-CCMP][WPS][ESS]	KabelBox-14F0
+00:1a:70:70:2c:13	2462	-88	[WPA-PSK-CCMP][ESS]	linksys
+90:5c:44:c5:3e:6b	2412	-97	[WPA-PSK-CCMP+TKIP][WPA2-PSK-CCMP+TKIP][WPS][ESS]	TC-A1394
+3a:0e:14:98:c3:01	2462	-76	[ESS]	Vodafone Hotspot
+4a:0e:14:98:c3:01	2462	-76	[ESS]	Vodafone Homespot
+58:d7:59:dc:1d:26	2412	-81	[ESS]	Telekom_FON
+46:67:51:08:d1:25	2437	-81	[ESS]	Vodafone Hotspot
+b6:98:2b:78:14:f5	2412	-94	[ESS]	Vodafone Hotspot
+4a:70:48:ff:b8:04	2462	-88	[IBSS]	Portthru
+";
