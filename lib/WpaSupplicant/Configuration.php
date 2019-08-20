@@ -11,8 +11,9 @@ class Configuration {
     return new self($parsed);
   }
 
-  public static function parse(string $content) {
-    return ConfigurationDeserializer::deserialize($content);
+  public static function parse(string $config) {
+    $deserializer = new ConfigurationDeserializer($config);
+    return $deserializer->deserialize();
   }
 
   public function __construct(array $config = []) {
@@ -33,7 +34,8 @@ class Configuration {
   }
 
   public function __toString() {
-    return ConfigurationSerializer::serialize($this->config);
+    $serializer = new ConfigurationSerializer($this->config);
+    return $serializer->serialize();
   }
 }
 
@@ -42,10 +44,16 @@ class ConfigurationDeserializer {
   const STATE_NETWORK = 1;
   const STATE_NETWORK_END = 2;
 
-  public static function deserialize(string $string) {
+  protected $config = "";
+
+  public function __construct(string $config) {
+    $this->config = $config;
+  }
+
+  public function deserialize() {
     $options = [];
     $network = [];
-    $lines = explode("\n", $string);
+    $lines = explode("\n", $this->config);
 
     $state = self::STATE_NONE;
     foreach ($lines as $line) {
@@ -87,26 +95,30 @@ class ConfigurationDeserializer {
 class ConfigurationSerializer {
   const STRING_OPTIONS = [ "ssid", "#psk" ];
 
-  public static function serialize(array $config) {
-    $networks = static::serializeNetworks($config['network']);
-    unset($config['network']);
+  protected $config = [];
 
+  public function __construct(array $config) {
+    $this->config = $config;
+  }
+
+  public function serialize() {
     $props = [];
-    foreach ($config as $option => $value) {
+    foreach ($this->config as $option => $value) {
+      if ($option == "network") { continue; }
       $props[] = "$option=$value";
     }
 
-    return implode("\n", $props) . "\n" . $networks;
+    return implode("\n", $props) . "\n" . $this->serializeNetworks();
   }
 
-  protected static function serializeNetworks($networks) {
-    if (empty($networks)) { return ""; }
+  protected function serializeNetworks() {
+    if (empty($this->config['network'])) { return ""; }
     $string = "";
 
-    foreach ($networks as $network) {
+    foreach ($this->config['network'] as $network) {
       $directive = [];
       foreach ($network as $option => $value) {
-        $directive[] = "  $option=" . static::formatValue($option, $value);
+        $directive[] = "  $option=" . $this->formatValue($option, $value);
       }
       $string .= "network={\n" . implode("\n", $directive) . "\n}\n";
     }
@@ -114,7 +126,7 @@ class ConfigurationSerializer {
     return $string;
   }
 
-  protected static function formatValue($option, $value) {
+  protected function formatValue($option, $value) {
     if (in_array($option, static::STRING_OPTIONS)) {
       return "\"$value\"";
     } else {
