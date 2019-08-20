@@ -52,4 +52,11 @@ class Test {
       echo __FUNCTION__ . ": $expected != $actual\n";
     }
   }
+
+  protected function assertInstanceOf($expected, $actual) {
+    $actual_class   = get_class($actual);
+    if ($expected != $actual_class) {
+      echo __FUNCTION__ . ": $expected != $actual_class\n";
+    }
+  }
 }
